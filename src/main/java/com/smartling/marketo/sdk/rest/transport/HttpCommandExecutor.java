@@ -6,6 +6,7 @@ import com.smartling.marketo.sdk.HasToBeMappedToJson;
 import com.smartling.marketo.sdk.rest.Command;
 import com.smartling.marketo.sdk.MarketoApiException;
 import org.glassfish.jersey.client.ClientProperties;
+import org.glassfish.jersey.filter.LoggingFilter;
 import org.glassfish.jersey.jackson.JacksonFeature;
 
 import javax.ws.rs.client.Client;
@@ -41,7 +42,7 @@ public class HttpCommandExecutor {
         this.clientId = clientId;
         this.clientSecret = clientSecret;
         this.tokenProvider = tokenProvider;
-        this.client = ClientBuilder.newClient().register(JacksonFeature.class).register(ObjectMapperProvider.class);
+        this.client = ClientBuilder.newClient().register(JacksonFeature.class).register(ObjectMapperProvider.class).register(LoggingFilter.class);
     }
 
     public void setConnectionTimeout(int timeout) {
